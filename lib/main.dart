@@ -100,6 +100,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: InAppWebView(
                       initialData: InAppWebViewInitialData(data: imageHTML),
+                      initialSettings: InAppWebViewSettings(
+                        javaScriptEnabled: true,
+                      ),
                       onWebViewCreated: (controller) async {
                         webViewController = controller;
                       },
@@ -119,7 +122,9 @@ class _HomePageState extends State<HomePage> {
                   ElevatedButton(
                     onPressed: () {
                       if (urlController.text.isNotEmpty) {
-                        webViewController.callAsyncJavaScript(functionBody: "updateImageSrc('$url')");
+                        webViewController.addJavaScriptHandler(handlerName: "handlerName", callback: (sdsd){});
+                        webViewController.evaluateJavascript(source: "updateImageSrc('$url')");
+                        // webViewController.callAsyncJavaScript(functionBody: "updateImageSrc('$url')");
                       }
                     },
                     child: Padding(
